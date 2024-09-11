@@ -140,13 +140,14 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                     ),
                   ),
                 ],
-                const SizedBox(height: 16),
+                const SizedBox(height: 2),
               ],
             ),
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.all(5.0),
+              // padding: const EdgeInsets.all(5.0)
+              padding: const EdgeInsets.only(left: 60),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -163,7 +164,7 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                       ),
                     ],
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 30),
                   Column(
                     children: [
                       Obx(() => Text(

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myblog/app/modules/home/providers/post_provider.dart';
 import 'package:myblog/app/modules/home/views/home_view.dart';
 import 'package:myblog/app/modules/profile/controllers/profile_controller.dart';
 import 'package:myblog/app/modules/profile/model/liked_posts.dart';
-import 'package:myblog/app/modules/profile/provider/profile_provider.dart';
 
 class LikedPostsPage extends GetView<ProfileController> {
   const LikedPostsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // تأكد من أنك قد قمت بتسجيل الـ controller في Get.put أو Get.lazyPut
     return Scaffold(
       //appBar: AppBar(title: const Text('المنشورات المفضلة')),
       body: Obx(() {

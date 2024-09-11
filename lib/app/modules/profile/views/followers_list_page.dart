@@ -38,7 +38,6 @@ class FollowersListPage extends GetView<ProfileController> {
               subtitle: Text(follower?.name ?? 'No Name'),
               onTap: () {
                 if (follower != null) {
-                  //Get.to(() => FollowerProfilePage(userId: follower.id));
                 }
               },
             );

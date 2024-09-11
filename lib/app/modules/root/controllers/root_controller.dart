@@ -30,9 +30,8 @@ class RootController extends GetxController {
     _selectedIndex.value = index;
   }
 
-  // تأكد من أن جميع العناصر هي Widgets صالحة
   final List<Widget>  screens = [
-             const HomeView (), // استخدم HomeView بدلاً من HomeController
+   const HomeView (), // استخدم HomeView بدلاً من HomeController
 
         CreatePostView(),
 
