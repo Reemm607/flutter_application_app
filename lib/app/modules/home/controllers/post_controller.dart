@@ -37,8 +37,6 @@ class HomeController extends GetxController {
       isLoading(true);
       var postsResult = await provider.fetchPosts();
       posts.assignAll(postsResult);
-    } catch (e) {
-      print("Failed to load posts: $e");
     } finally {
       isLoading(false);
     }
@@ -48,8 +46,8 @@ class HomeController extends GetxController {
     try {
       var likesResult = await provider.fetchLikes();
       likedPosts.assignAll(likesResult);
+    // ignore: empty_catches
     } catch (e) {
-      print("Failed to load likes: $e");
     }
   }
 

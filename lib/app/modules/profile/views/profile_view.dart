@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:myblog/app/modules/profile/views/followers_list_page.dart';
 import 'package:myblog/app/modules/profile/views/liked_posts_page.dart';
 import 'package:myblog/app/modules/profile/views/saved_posts_page.dart';
 import 'package:myblog/app/modules/profile/views/user_post_page.dart';
@@ -158,9 +159,12 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           )),
-                      const Text(
-                        'متابعين', // النص
-                        style: TextStyle(fontSize: 16),
+                      InkWell(
+                        onTap: () => Get.to(()=>const FollowersListPage()),
+                        child: const Text(
+                          'Followers', // النص
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ),
                     ],
                   ),
@@ -173,7 +177,7 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           )),
                       const Text(
-                        'متابَعون', // النص
+                        'Following', // النص
                         style: TextStyle(fontSize: 16),
                       ),
                     ],

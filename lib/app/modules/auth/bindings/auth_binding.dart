@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:myblog/app/modules/auth/controllers/controllers.dart';
 import 'package:myblog/app/modules/auth/providers/providers.dart';
-
-import '../../profile/controllers/profile_controller.dart';
 import '../controllers/refresh_token.dart';
 
 

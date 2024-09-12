@@ -18,15 +18,7 @@ class PhoneVerificationController extends GetxController {
   bool get isLoading => _isLoading.value;
   bool get isVerified => _isVerified.value;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {

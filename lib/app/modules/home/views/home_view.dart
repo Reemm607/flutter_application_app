@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myblog/app/modules/home/controllers/post_controller.dart';
 import 'package:myblog/app/modules/home/models/post.dart';
-
 import '../../profile/model/liked_posts.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -37,18 +36,18 @@ class PostCard extends StatelessWidget {
     final HomeController controller = Get.find();
 
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Card(
         elevation: 2,
         child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 25,
                     backgroundColor: Colors.blue,
                     child: Icon(
@@ -57,19 +56,19 @@ class PostCard extends StatelessWidget {
                       size: 40,
                     ),
                   ),
-                  SizedBox(width: 10.0),
+                  const SizedBox(width: 10.0),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           post.user.profile?.name ?? 'None',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         ),
-                        SizedBox(height: 5.0),
+                        const SizedBox(height: 5.0),
                       ],
                     ),
                   ),
@@ -85,7 +84,7 @@ class PostCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -97,26 +96,26 @@ class PostCard extends StatelessWidget {
                 height: 200.0,
                 width: double.infinity,
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Text(
                 post.title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 5.0),
+              const SizedBox(height: 5.0),
               Text(
                 post.content,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 5.0),
+              const SizedBox(height: 5.0),
               Text(
                 post.createdAt,
                 style: const TextStyle(color: Colors.grey),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -170,18 +169,18 @@ class LikePostCard extends StatelessWidget {
     final HomeController controller = Get.find<HomeController>();
 
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Card(
         elevation: 5,
         child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 25,
                     backgroundColor: Colors.blue,
                     child: Icon(
@@ -190,8 +189,8 @@ class LikePostCard extends StatelessWidget {
                       size: 40,
                     ),
                   ),
-                  SizedBox(width: 10.0),
-                  Expanded(
+                  const SizedBox(width: 10.0),
+                  const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -218,7 +217,7 @@ class LikePostCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -230,26 +229,26 @@ class LikePostCard extends StatelessWidget {
                 height: 200.0,
                 width: double.infinity,
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Text(
                 post.title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 5.0),
+              const SizedBox(height: 5.0),
               Text(
                 post.content,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 5.0),
+              const SizedBox(height: 5.0),
               Text(
                 post.createdAt,
                 style: const TextStyle(color: Colors.grey),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

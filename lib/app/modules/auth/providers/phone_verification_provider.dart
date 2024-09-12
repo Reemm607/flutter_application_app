@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../../../shared/shared.dart';
 import '../models/models.dart';
 
 class PhoneVerificationProvider extends GetConnect {

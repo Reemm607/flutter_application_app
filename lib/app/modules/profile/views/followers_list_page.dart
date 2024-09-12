@@ -47,3 +47,5 @@ class FollowersListPage extends GetView<ProfileController> {
     );
   }
 }
+
+            
