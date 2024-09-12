@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:myblog/app/modules/profile/views/followers_list_page.dart';
+import 'package:myblog/app/modules/profile/views/following_list.page.dart';
 import 'package:myblog/app/modules/profile/views/liked_posts_page.dart';
 import 'package:myblog/app/modules/profile/views/saved_posts_page.dart';
 import 'package:myblog/app/modules/profile/views/user_post_page.dart';
@@ -59,89 +60,98 @@ class ProfileDetailsPage extends GetView<ProfileController> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: const EdgeInsets.all(20.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Obx(
-                  () => GestureDetector(
-                    onTap: () => controller.pickImage(),
-                    child: Container(
-                      height: 80,
-                      width: 80,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(38),
-                        image: controller.image.value != null
-                            ? DecorationImage(
-                                image: FileImage(controller.image.value!),
-                                fit: BoxFit.cover,
-                              )
-                            : null,
-                        border: Border.all(
-                          color: Color.fromARGB(255, 247, 248, 250)
-                              .withOpacity(0.5),
-                          width: 2,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Obx(
+                      () => GestureDetector(
+                        onTap: () => controller.pickImage(),
+                        child: Container(
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(38),
+                            image: controller.image.value != null
+                                ? DecorationImage(
+                                    image: FileImage(controller.image.value!),
+                                    fit: BoxFit.cover,
+                                  )
+                                : null,
+                            border: Border.all(
+                              color: Color.fromARGB(255, 247, 248, 250)
+                                  .withOpacity(0.5),
+                              width: 2,
+                            ),
+                          ),
+                          child: controller.image.value == null
+                              ? Center(
+                                  child: CircleAvatar(
+                                    // radius: 40,
+                                    backgroundColor: Colors.grey.shade300,
+                                    child: GestureDetector(
+                                      onTap: () => controller.pickImage(),
+                                      child: const Icon(
+                                        Icons.control_point_rounded,
+                                        size: 40,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : null,
                         ),
                       ),
-                      child: controller.image.value == null
-                          ? Center(
-                              child: CircleAvatar(
-                                // radius: 40,
-                                backgroundColor: Colors.grey.shade300,
-                                child: GestureDetector(
-                                  onTap: () => controller.pickImage(),
-                                  child: const Icon(
-                                    Icons.control_point_rounded,
-                                    size: 40,
-                                    color: Colors.white,
-                                  ),
+                    ),
+                    const SizedBox(height: 10),
+                    if (profile != null) ...[
+                      Text(
+                        profile!.username,
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        profile!.name,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w400),
+                      ),
+                      Text(
+                        profile!.email,
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w300),
+                      ),
+                    ] else ...[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Center(
+                          child: Align(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Get.to(() => CreateProfilePage());
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  side: const BorderSide(color: Colors.black, width: 1),
                                 ),
                               ),
-                            )
-                          : null,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                if (profile != null) ...[
-                  Text(
-                    profile!.username,
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    profile!.name,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w400),
-                  ),
-                  Text(
-                    profile!.email,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w300),
-                  ),
-                ] else ...[
-                  Align(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(() => CreateProfilePage());
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 11),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: const BorderSide(color: Colors.black, width: 1),
+                              child: const Text(
+                                'Create Profile',
+                                style: TextStyle(fontSize: 13, color: Colors.black),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        'Create Profile',
-                        style: TextStyle(fontSize: 13, color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ],
-                const SizedBox(height: 2),
+                    ],
+                    const SizedBox(height: 2),
+                  ],
+                ),
               ],
             ),
           ),
@@ -155,7 +165,7 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                   Column(
                     children: [
                       Obx(() => Text(
-                            '${controller.followingProfiles.length}', // الرقم
+                            '${controller.followersProfiles.length}', // الرقم
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           )),
@@ -172,13 +182,16 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                   Column(
                     children: [
                       Obx(() => Text(
-                            '${controller.followersProfiles.length}', // الرقم
+                            '${controller.followingProfiles.length}', // الرقم
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           )),
-                      const Text(
-                        'Following', // النص
-                        style: TextStyle(fontSize: 16),
+                      InkWell(
+                   onTap: () => Get.to(()=>const FollowingListPage ()),
+                        child: const Text(
+                          'Following', // النص
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ),
                     ],
                   ),

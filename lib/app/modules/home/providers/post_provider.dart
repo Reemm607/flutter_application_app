@@ -78,6 +78,19 @@ class HomeProvider extends GetConnect {
       throw Exception('Failed to load follows');
     }
   }
+    Future<List<int>> fetchFollowing() async {
+    await tokenController.refreshToken();
+    final response = await get(
+      'http://myblog.mobaen.com/api/follows',
+      headers: {'Authorization': 'Bearer ${storage.read("jwt_token")}'},
+    );
+    if (response.statusCode == 200) {
+      final data = response.body['data']['data'];
+      return List<int>.from(data.map((item) => item['pivot']['followed_id']));
+    } else {
+      throw Exception('Failed to load follows');
+    }
+  }
 
   Future<Response> likePost(int postId) async {
     await tokenController.refreshToken();
