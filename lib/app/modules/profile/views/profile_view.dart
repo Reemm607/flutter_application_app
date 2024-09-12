@@ -60,105 +60,96 @@ class ProfileDetailsPage extends GetView<ProfileController> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
+            padding: const EdgeInsets.all(40.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Obx(
-                      () => GestureDetector(
-                        onTap: () => controller.pickImage(),
-                        child: Container(
-                          height: 80,
-                          width: 80,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(38),
-                            image: controller.image.value != null
-                                ? DecorationImage(
-                                    image: FileImage(controller.image.value!),
-                                    fit: BoxFit.cover,
-                                  )
-                                : null,
-                            border: Border.all(
-                              color: Color.fromARGB(255, 247, 248, 250)
-                                  .withOpacity(0.5),
-                              width: 2,
-                            ),
-                          ),
-                          child: controller.image.value == null
-                              ? Center(
-                                  child: CircleAvatar(
-                                    // radius: 40,
-                                    backgroundColor: Colors.grey.shade300,
-                                    child: GestureDetector(
-                                      onTap: () => controller.pickImage(),
-                                      child: const Icon(
-                                        Icons.control_point_rounded,
-                                        size: 40,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : null,
+                Obx(
+                  () => GestureDetector(
+                    onTap: () => controller.pickImage(),
+                    child: Container(
+                      height: 80,
+                      width: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(38),
+                        image: controller.image.value != null
+                            ? DecorationImage(
+                                image: FileImage(controller.image.value!),
+                                fit: BoxFit.cover,
+                              )
+                            : null,
+                        border: Border.all(
+                          color: Color.fromARGB(255, 247, 248, 250)
+                              .withOpacity(0.5),
+                          width: 2,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    if (profile != null) ...[
-                      Text(
-                        profile!.username,
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        profile!.name,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w400),
-                      ),
-                      Text(
-                        profile!.email,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w300),
-                      ),
-                    ] else ...[
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Center(
-                          child: Align(
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Get.to(() => CreateProfilePage());
-                              },
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                  side: const BorderSide(color: Colors.black, width: 1),
+                      child: controller.image.value == null
+                          ? Center(
+                              child: CircleAvatar(
+                                // radius: 40,
+                                backgroundColor: Colors.grey.shade300,
+                                child: GestureDetector(
+                                  onTap: () => controller.pickImage(),
+                                  child: const Icon(
+                                    Icons.control_point_rounded,
+                                    size: 40,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                              child: const Text(
-                                'Create Profile',
-                                style: TextStyle(fontSize: 13, color: Colors.black),
-                              ),
-                            ),
-                          ),
+                            )
+                          : null,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                if (profile != null) ...[
+                  Text(
+                    profile!.username,
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    profile!.name,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    profile!.email,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w300),
+                  ),
+                ] else ...[
+                  Align(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => CreateProfilePage());
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 11),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          side: const BorderSide(color: Colors.black, width: 1),
                         ),
                       ),
-                    ],
-                    const SizedBox(height: 2),
-                  ],
-                ),
+                      child: const Text(
+                        'Create Profile',
+                        style: TextStyle(fontSize: 13, color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 2),
               ],
             ),
           ),
           Center(
             child: Padding(
               // padding: const EdgeInsets.all(5.0)
-              padding: const EdgeInsets.only(left: 60),
+              padding: const EdgeInsets.only(left: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -170,7 +161,7 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           )),
                       InkWell(
-                        onTap: () => Get.to(()=>const FollowersListPage()),
+                        onTap: () => Get.to(() => const FollowersListPage()),
                         child: const Text(
                           'Followers', // النص
                           style: TextStyle(fontSize: 16),
@@ -178,7 +169,7 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                       ),
                     ],
                   ),
-                  const SizedBox(width: 30),
+                  const SizedBox(width: 40),
                   Column(
                     children: [
                       Obx(() => Text(
@@ -187,7 +178,7 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           )),
                       InkWell(
-                   onTap: () => Get.to(()=>const FollowingListPage ()),
+                        onTap: () => Get.to(() => const FollowingListPage()),
                         child: const Text(
                           'Following', // النص
                           style: TextStyle(fontSize: 16),
@@ -199,6 +190,7 @@ class ProfileDetailsPage extends GetView<ProfileController> {
               ),
             ),
           ),
+         const SizedBox(height: 20),
           const Expanded(
             child: DefaultTabController(
               length: 3,
@@ -231,7 +223,6 @@ class ProfileDetailsPage extends GetView<ProfileController> {
       ),
     );
   }
-
 }
 
 class CreateProfilePage extends GetView<ProfileController> {
@@ -397,5 +388,4 @@ class EditProfilePage extends GetView<ProfileController> {
       },
     );
   }
-
 }
