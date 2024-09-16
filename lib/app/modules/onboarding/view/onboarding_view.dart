@@ -14,7 +14,7 @@ class OnboardingView extends GetView<OnboardingController> {
 
   @override
   Widget build(BuildContext context) {
-    // final OnboardingController controller = Get.find<OnboardingController>();
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
@@ -22,7 +22,7 @@ class OnboardingView extends GetView<OnboardingController> {
           PageView(
             controller: controller.pageController,
             onPageChanged: controller.onPageChanged,
-            children:  [
+            children: [
               OnboardingPage(
                 image: TImages.onBoardingImage1,
                 title: TTexts.onBoardingTitle1,
@@ -40,23 +40,30 @@ class OnboardingView extends GetView<OnboardingController> {
               ),
             ],
           ),
-//  Center(
-//               child: IconButton(
-//                 onPressed: (){
-//                   controller.finished();
-//                 }, 
-//                 icon: const Icon(Icons.home,),),
-//             ),
-          /// Skip Button
-          const OnBoardingSkip(),
+           /// Skip Button
+
+       Positioned(
+  top: screenSize.height * 0.05,
+  right: screenSize.width * 0.05,
+  child:  const OnBoardingSkip(),
+           ),
 
           /// Dot Navigation smoothPageIndicator
-          const OnBoardingDotNagation(),
-
+          Positioned(
+  bottom: screenSize.height * 0.1,
+  left: screenSize.width * 0.5 - 40,
+  child:  const OnBoardingDotNagation(),
+   ),
+    
           /// Circular Button
-          const OnBoardingNextButton(),
+            Positioned(
+  bottom: screenSize.height * 0.05,
+  right: screenSize.width * 0.05 ,
+  child:  const OnBoardingNextButton(),
+   ),
+          
         ],
-    ),
-);
-}
+      ),
+    );
+  }
 }
