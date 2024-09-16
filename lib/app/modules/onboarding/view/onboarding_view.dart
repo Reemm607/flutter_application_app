@@ -50,15 +50,15 @@ class OnboardingView extends GetView<OnboardingController> {
 
           /// Dot Navigation smoothPageIndicator
           Positioned(
-  bottom: screenSize.height * 0.1,
-  left: screenSize.width * 0.5 - 40,
+  bottom: screenSize.height * 0.3,
+  left: screenSize.width * 0.34,
   child:  const OnBoardingDotNagation(),
    ),
     
           /// Circular Button
             Positioned(
-  bottom: screenSize.height * 0.05,
-  right: screenSize.width * 0.05 ,
+  bottom: screenSize.height * 0.20,
+  right: screenSize.width * 0.09 ,
   child:  const OnBoardingNextButton(),
    ),
           
