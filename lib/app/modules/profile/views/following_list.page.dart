@@ -17,14 +17,14 @@ class FollowingListPage extends GetView<ProfileController> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (controller.followersProfiles.isEmpty) {  // Use followedProfiles instead of followingProfiles
+        if (controller.followingProfiles.isEmpty) {  // Use followedProfiles instead of followingProfiles
           return const Center(child: Text('لا يوجد أشخاص تتابعهم.'));
         }
 
         return ListView.builder(
-          itemCount: controller.followersProfiles.length,  // Use followedProfiles instead of followingProfiles
+          itemCount: controller.followingProfiles.length,  // Use followedProfiles instead of followingProfiles
           itemBuilder: (context, index) {
-            final following = controller.followersProfiles[index];  // Use followedProfiles instead of followingProfiles
+            final following = controller.followingProfiles[index];  // Use followedProfiles instead of followingProfiles
 
             return ListTile(
               leading: const CircleAvatar(

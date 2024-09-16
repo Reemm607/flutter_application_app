@@ -88,7 +88,7 @@ class HomeProvider extends GetConnect {
       final data = response.body['data']['data'];
       return List<int>.from(data.map((item) => item['pivot']['followed_id']));
     } else {
-      throw Exception('Failed to load follows');
+      throw Exception('Failed to load following');
     }
   }
 

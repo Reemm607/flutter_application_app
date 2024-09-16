@@ -17,14 +17,14 @@ class FollowersListPage extends GetView<ProfileController> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (controller.followingProfiles.isEmpty) {
+        if (controller.followersProfiles.isEmpty) {
           return const Center(child: Text('لا يوجد متابعون.'));
         }
 
         return ListView.builder(
-          itemCount: controller.followingProfiles.length,
+          itemCount: controller.followersProfiles.length,
           itemBuilder: (context, index) {
-            final follower = controller.followingProfiles[index];
+            final follower = controller.followersProfiles[index];
 
             return ListTile(
               leading: const CircleAvatar(

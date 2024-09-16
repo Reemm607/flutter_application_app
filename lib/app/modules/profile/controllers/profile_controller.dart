@@ -125,8 +125,8 @@ class ProfileController extends GetxController {
   Future<void> fetchFollowing() async {
     isLoading(true);
     try {
-      final followers = await homeProvider.fetchFollows();
-      for (int id in followers) {
+      final following= await homeProvider.fetchFollowing();
+      for (int id in following) {
         final followeringProfile = await profileProvider.fetchProfileByUserId(id);
         followingProfiles.add(followeringProfile);
       }
@@ -154,18 +154,6 @@ class ProfileController extends GetxController {
     }
   }
 
-  // Future<void> followUser(int userId) async {
-  //   isLoading(true);
-  //   try {
-  //     await homeProvider.follow(userId);
-  //     final followingProfiles = await profileProvider.fetchProfileByUserId(userId);
-  //     followersProfiles.add(followingProfiles);
-  //   } catch (e) {
-  //     print('Error fetching user: $e');
-  //   } finally {
-  //     isLoading(false);
-  //   }
-  // }
 
   Future<void> fetchPosts() async {
     try {
