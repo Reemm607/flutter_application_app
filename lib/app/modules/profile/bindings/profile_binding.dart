@@ -13,7 +13,7 @@ class ProfileBinding extends Bindings {
  void dependencies() {
     print('ProfileBinding is being executed');
     Get.lazyPut<ProfileController>(() =>
-        ProfileController(HomeProvider(), profileProvider: ProfileProvider()));
+        ProfileController( profileProvider: ProfileProvider()));
            Get.lazyPut<PostController>(
         () => PostController(postProvider: PostProvider()));
     Get.put(RefreshTokenController());

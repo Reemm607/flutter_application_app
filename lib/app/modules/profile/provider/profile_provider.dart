@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:myblog/app/modules/auth/controllers/refresh_token.dart';
+import 'package:myblog/app/modules/home/models/post.dart';
 import 'package:myblog/app/modules/profile/model/liked_posts.dart';
 import 'package:myblog/app/modules/profile/model/profile_model.dart';
 import 'package:myblog/app/modules/profile/model/profile_response_model.dart';
@@ -44,7 +45,35 @@ class ProfileProvider extends GetConnect {
 
     return null;
   }
+ Future<List<Post>> fetchPosts() async {
+    await tokenController.refreshToken();
+    List<Post> allPosts = [];
+    int currentPage = 1;
+    bool hasMorePages = true;
 
+    while (hasMorePages) {
+      final response = await get(
+        'http://myblog.mobaen.com/api/posts?page=$currentPage',
+        headers: {'Authorization': 'Bearer ${storage.read("jwt_token")}'},
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.body['data']['data'];
+        allPosts
+            .addAll(List<Post>.from(data.map((item) => Post.fromJson(item))));
+
+        // Check if there are more pages
+        int lastPage = response.body['data']['last_page'];
+        hasMorePages = currentPage < lastPage;
+        currentPage++;
+      } else {
+        throw Exception('Failed to load posts');
+      }
+    }
+
+    // Reverse the list to show newest posts first
+    return allPosts.reversed.toList();
+  }
   // Create Profile
   Future<Response> createProfile(ProfileModel profile) async {
     await tokenController.refreshToken();
@@ -105,4 +134,32 @@ class ProfileProvider extends GetConnect {
       throw Exception('Failed to load liked posts');
     }
   }
+    Future<List<int>> fetchFollows() async {
+    await tokenController.refreshToken();
+    final response = await get(
+      'http://myblog.mobaen.com/api/follows?followers=true',
+      headers: {'Authorization': 'Bearer ${storage.read("jwt_token")}'},
+    );
+    if (response.statusCode == 200) {
+      final data = response.body['data']['data'];
+      return List<int>.from(data.map((item) => item['pivot']['followed_id']));
+    } else {
+      throw Exception('Failed to load follows');
+    }
+  }
+    Future<List<int>> fetchFollowing() async {
+    await tokenController.refreshToken();
+    final response = await get(
+      'http://myblog.mobaen.com/api/follows',
+      headers: {'Authorization': 'Bearer ${storage.read("jwt_token")}'},
+    );
+    if (response.statusCode == 200) {
+      final data = response.body['data']['data'];
+      return List<int>.from(data.map((item) => item['pivot']['followed_id']));
+    } else {
+      throw Exception('Failed to load following');
+    }
+  }
+  
+
 }

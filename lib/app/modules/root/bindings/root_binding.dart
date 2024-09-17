@@ -19,7 +19,7 @@ class RootBinding extends Bindings {
       () => HomeController(),
     );
 Get.lazyPut<ProfileController>(() =>
-        ProfileController(HomeProvider(), profileProvider: ProfileProvider()));
+        ProfileController( profileProvider: ProfileProvider()));
     Get.lazyPut<PostController>(
         () => PostController(postProvider: PostProvider()));
     Get.lazyPut<ProfilePage>(

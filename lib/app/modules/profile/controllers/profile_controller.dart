@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:myblog/app/modules/home/models/post.dart';
-import 'package:myblog/app/modules/home/providers/post_provider.dart';
 import 'package:myblog/app/modules/profile/model/liked_posts.dart';
 import 'package:myblog/app/modules/profile/model/profile_model.dart';
 import 'package:myblog/app/modules/profile/model/profile_response_model.dart';
@@ -20,16 +19,18 @@ class ProfileController extends GetxController {
   var posts = <Post>[].obs;
   var image = Rxn<File>();
   var followersCount = 0.obs;
+  var followingCount = 0.obs;
+
 
   var followingProfiles = <ProfileResponseModel?>[].obs;
   var followersProfiles = <ProfileResponseModel?>[].obs;
 
   final ProfileProvider profileProvider;
-  final HomeProvider homeProvider;
+  // final HomeProvider homeProvider;
   final GetStorage storage = GetStorage();
   final ImagePicker _picker = ImagePicker();
 
-  ProfileController(this.homeProvider, {required this.profileProvider});
+  ProfileController({required this.profileProvider});
   void pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -125,7 +126,9 @@ class ProfileController extends GetxController {
   Future<void> fetchFollowing() async {
     isLoading(true);
     try {
-      final following= await homeProvider.fetchFollowing();
+      final following= await profileProvider.fetchFollowing();
+       followingCount.value = following.length;
+
       for (int id in following) {
         final followeringProfile = await profileProvider.fetchProfileByUserId(id);
         followingProfiles.add(followeringProfile);
@@ -140,7 +143,7 @@ class ProfileController extends GetxController {
   Future<void> fetchFollowers() async {
     isLoading(true);
     try {
-      final followers = await homeProvider.fetchFollows();
+      final followers = await profileProvider.fetchFollows();
       followersCount.value = followers.length;
       followersProfiles.clear();
       for (int id in followers) {
@@ -157,7 +160,7 @@ class ProfileController extends GetxController {
 
   Future<void> fetchPosts() async {
     try {
-      var allPosts = await homeProvider.fetchPosts();
+      var allPosts = await profileProvider.fetchPosts();
       var userPosts = allPosts
           .where((post) => post.user.id == storage.read('user_id'))
           .toList();
