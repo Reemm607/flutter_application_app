@@ -248,17 +248,22 @@ class ProfileDetailsPage extends GetView<ProfileController> {
               // ),
             ),
             actions: [
-              PopupMenuButton<String>(
-                onSelected: (value) {
-                  if (value == 'signOut') {
-                    storage.erase();
-                    Get.offAllNamed(Routes.SIGNIN);
-                  }
-                },
-                itemBuilder: (context) => [
-                  const PopupMenuItem(
-                    value: 'signOut',
-                    child: Text('تسجيل الخروج'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  PopupMenuButton<String>(
+                    onSelected: (value) {
+                      if (value == 'signOut') {
+                        storage.erase();
+                        Get.offAllNamed(Routes.SIGNIN);
+                      }
+                    },
+                    itemBuilder: (context) => [
+                      const PopupMenuItem(
+                        value: 'signOut',
+                        child: Text(' SignOut'),
+                      ),
+                    ],
                   ),
                 ],
               ),
