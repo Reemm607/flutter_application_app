@@ -31,6 +31,200 @@ class ProfilePage extends GetView<ProfileController> {
   }
 }
 
+// class ProfileDetailsPage extends GetView<ProfileController> {
+//   final ProfileResponseModel? profile;
+//   final storage = GetStorage();
+
+//   ProfileDetailsPage({super.key, required this.profile});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+      
+//       appBar: AppBar(
+//         title: const Text(' '),
+//         leading: PopupMenuButton<String>(
+//           onSelected: (value) {
+//             if (value == 'signOut') {
+//               storage.erase();
+//               Get.offAllNamed(Routes.SIGNIN);
+//             }
+//           },
+//           itemBuilder: (context) => [
+//             const PopupMenuItem(
+//               value: 'signOut',
+//               child: Text('Sign Out'),
+//             ),
+//           ],
+//         ),
+//       ),
+//       body: Column(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.all(40.0),
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                 Obx(
+//                   () => GestureDetector(
+//                     onTap: () => controller.pickImage(),
+//                     child: Container(
+//                       height: 80,
+//                       width: 80,
+//                       decoration: BoxDecoration(
+//                         color: Colors.grey[200],
+//                         borderRadius: BorderRadius.circular(38),
+//                         image: controller.image.value != null
+//                             ? DecorationImage(
+//                                 image: FileImage(controller.image.value!),
+//                                 fit: BoxFit.cover,
+//                               )
+//                             : null,
+//                         border: Border.all(
+//                           color: Color.fromARGB(255, 247, 248, 250)
+//                               .withOpacity(0.5),
+//                           width: 2,
+//                         ),
+//                       ),
+//                       child: controller.image.value == null
+//                           ? Center(
+//                               child: CircleAvatar(
+//                                 // radius: 40,
+//                                 backgroundColor: Colors.grey.shade300,
+//                                 child: GestureDetector(
+//                                   onTap: () => controller.pickImage(),
+//                                   child: const Icon(
+//                                     Icons.control_point_rounded,
+//                                     size: 40,
+//                                     color: Colors.white,
+//                                   ),
+//                                 ),
+//                               ),
+//                             )
+//                           : null,
+//                     ),
+//                   ),
+//                 ),
+//                 const SizedBox(height: 10),
+//                 if (profile != null) ...[
+//                   Text(
+//                     profile!.username,
+//                     style: const TextStyle(
+//                         fontSize: 24, fontWeight: FontWeight.bold),
+//                   ),
+//                   Text(
+//                     profile!.name,
+//                     style: const TextStyle(
+//                         fontSize: 20, fontWeight: FontWeight.w400),
+//                   ),
+//                   Text(
+//                     profile!.email,
+//                     style: const TextStyle(
+//                         fontSize: 16, fontWeight: FontWeight.w300),
+//                   ),
+//                 ] else ...[
+//                   Align(
+//                     child: ElevatedButton(
+//                       onPressed: () {
+//                         Get.to(() => CreateProfilePage());
+//                       },
+//                       style: ElevatedButton.styleFrom(
+//                         padding: const EdgeInsets.symmetric(
+//                             horizontal: 40, vertical: 11),
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(30),
+//                           side: const BorderSide(color: Colors.black, width: 1),
+//                         ),
+//                       ),
+//                       child: const Text(
+//                         'Create Profile',
+//                         style: TextStyle(fontSize: 13, color: Colors.black),
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//                 const SizedBox(height: 2),
+//               ],
+//             ),
+//           ),
+//           Center(
+//             child: Padding(
+//               // padding: const EdgeInsets.all(5.0)
+//               padding: const EdgeInsets.only(left: 10),
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 children: [
+//                   Column(
+//                     children: [
+//                       Obx(() => Text(
+//                             '${controller.followersProfiles.length}', // الرقم
+//                             style: const TextStyle(
+//                                 fontSize: 16, fontWeight: FontWeight.bold),
+//                           )),
+//                       InkWell(
+//                         onTap: () => Get.to(() => const FollowersListPage()),
+//                         child: const Text(
+//                           'Followers', // النص
+//                           style: TextStyle(fontSize: 16),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                   const SizedBox(width: 40),
+//                   Column(
+//                     children: [
+//                       Obx(() => Text(
+//                             '${controller.followingProfiles.length}', // الرقم
+//                             style: const TextStyle(
+//                                 fontSize: 16, fontWeight: FontWeight.bold),
+//                           )),
+//                       InkWell(
+//                         onTap: () => Get.to(() => const FollowingListPage()),
+//                         child: const Text(
+//                           'Following', // النص
+//                           style: TextStyle(fontSize: 16),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//          const SizedBox(height: 20),
+//           const Expanded(
+//             child: DefaultTabController(
+//               length: 3,
+//               child: Column(
+//                 children: [
+//                   TabBar(
+//                     tabs: [
+//                       Tab(text: 'Posts'),
+//                       Tab(text: 'Saved'),
+//                       Tab(text: 'Liked'),
+//                     ],
+//                     indicatorColor: Colors.blueAccent,
+//                     labelColor: Colors.blueAccent,
+//                     unselectedLabelColor: Colors.black,
+//                   ),
+//                   Expanded(
+//                     child: TabBarView(
+//                       children: [
+//                         UserPostsPage(),
+//                         SavedPostsPage(),
+//                         LikedPostsPage(),
+//                       ],
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 class ProfileDetailsPage extends GetView<ProfileController> {
   final ProfileResponseModel? profile;
   final storage = GetStorage();
@@ -40,132 +234,88 @@ class ProfileDetailsPage extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(' '),
-        leading: PopupMenuButton<String>(
-          onSelected: (value) {
-            if (value == 'signOut') {
-              storage.erase();
-              Get.offAllNamed(Routes.SIGNIN);
-            }
-          },
-          itemBuilder: (context) => [
-            const PopupMenuItem(
-              value: 'signOut',
-              child: Text('Sign Out'),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 40.0,
+            floating: true,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: profile != null ? Text(profile!.username) : const Text('Profile'),
+              // background: Image.asset(
+              //   'assets/profile_background.jpg',
+              //   fit: BoxFit.cover,
+              // ),
             ),
-          ],
-        ),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Obx(
-                  () => GestureDetector(
-                    onTap: () => controller.pickImage(),
-                    child: Container(
-                      height: 80,
-                      width: 80,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(38),
-                        image: controller.image.value != null
-                            ? DecorationImage(
-                                image: FileImage(controller.image.value!),
-                                fit: BoxFit.cover,
-                              )
-                            : null,
-                        border: Border.all(
-                          color: Color.fromARGB(255, 247, 248, 250)
-                              .withOpacity(0.5),
-                          width: 2,
-                        ),
-                      ),
-                      child: controller.image.value == null
-                          ? Center(
-                              child: CircleAvatar(
-                                // radius: 40,
-                                backgroundColor: Colors.grey.shade300,
-                                child: GestureDetector(
-                                  onTap: () => controller.pickImage(),
-                                  child: const Icon(
-                                    Icons.control_point_rounded,
-                                    size: 40,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : null,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                if (profile != null) ...[
-                  Text(
-                    profile!.username,
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    profile!.name,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w400),
-                  ),
-                  Text(
-                    profile!.email,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w300),
-                  ),
-                ] else ...[
-                  Align(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(() => CreateProfilePage());
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 11),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: const BorderSide(color: Colors.black, width: 1),
-                        ),
-                      ),
-                      child: const Text(
-                        'Create Profile',
-                        style: TextStyle(fontSize: 13, color: Colors.black),
-                      ),
-                    ),
+            actions: [
+              PopupMenuButton<String>(
+                onSelected: (value) {
+                  if (value == 'signOut') {
+                    storage.erase();
+                    Get.offAllNamed(Routes.SIGNIN);
+                  }
+                },
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
+                    value: 'signOut',
+                    child: Text('تسجيل الخروج'),
                   ),
                 ],
-                const SizedBox(height: 2),
+              ),
+            ],
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: Column(
+                    children: [
+                      Obx(() => GestureDetector(
+                        onTap: () => controller.pickImage(),
+                        child: CircleAvatar(
+                          radius: 40,
+                          backgroundImage: controller.image.value != null
+                              ? FileImage(controller.image.value!)
+                              : null,
+                          backgroundColor: Colors.grey[200],
+                          child: controller.image.value == null
+                              ? Icon(Icons.control_point_rounded, size: 40, color: Colors.white)
+                              : null,
+                        ),
+                      )),
+                      const SizedBox(height: 10),
+                      if (profile != null) ...[
+                        Text(profile!.username, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                        Text(profile!.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
+                        Text(profile!.email, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300)),
+                      ] else ...[
+                        ElevatedButton(
+                          onPressed: () => Get.to(() => CreateProfilePage()),
+                          child: const Text('إنشاء الملف الشخصي', style: TextStyle(fontSize: 13, color: Colors.black)),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-          Center(
+          SliverToBoxAdapter(
             child: Padding(
-              // padding: const EdgeInsets.all(5.0)
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
                     children: [
                       Obx(() => Text(
-                            '${controller.followersProfiles.length}', // الرقم
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          )),
+                        '${controller.followersProfiles.length}',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      )),
                       InkWell(
                         onTap: () => Get.to(() => const FollowersListPage()),
-                        child: const Text(
-                          'Followers', // النص
-                          style: TextStyle(fontSize: 16),
-                        ),
+                        child: const Text('المتابعون', style: TextStyle(fontSize: 16)),
                       ),
                     ],
                   ),
@@ -173,16 +323,13 @@ class ProfileDetailsPage extends GetView<ProfileController> {
                   Column(
                     children: [
                       Obx(() => Text(
-                            '${controller.followingProfiles.length}', // الرقم
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          )),
+                        '${controller.followingProfiles.length}',
+
+style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      )),
                       InkWell(
                         onTap: () => Get.to(() => const FollowingListPage()),
-                        child: const Text(
-                          'Following', // النص
-                          style: TextStyle(fontSize: 16),
-                        ),
+                        child: const Text('المتابَعون', style: TextStyle(fontSize: 16)),
                       ),
                     ],
                   ),
@@ -190,17 +337,16 @@ class ProfileDetailsPage extends GetView<ProfileController> {
               ),
             ),
           ),
-         const SizedBox(height: 20),
-          const Expanded(
+          SliverFillRemaining(
             child: DefaultTabController(
               length: 3,
               child: Column(
                 children: [
                   TabBar(
-                    tabs: [
+                    tabs: const [
                       Tab(text: 'Posts'),
-                      Tab(text: 'Saved'),
-                      Tab(text: 'Liked'),
+                      Tab(text: 'Save'),
+                      Tab(text: 'Like'),
                     ],
                     indicatorColor: Colors.blueAccent,
                     labelColor: Colors.blueAccent,
@@ -224,7 +370,6 @@ class ProfileDetailsPage extends GetView<ProfileController> {
     );
   }
 }
-
 class CreateProfilePage extends GetView<ProfileController> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();

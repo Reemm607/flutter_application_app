@@ -52,7 +52,7 @@ class PhoneVerificationView extends GetView<PhoneVerificationController> {
                       : TextButton(
                           onPressed: controller.submitVerificationCode,
                           child: Text(
-                            "تحقق من الهاتف".tr,
+                            " Check phone ".tr,
                           ),
                         ),
                 ),

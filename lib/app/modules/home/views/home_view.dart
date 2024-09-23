@@ -1,7 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:myblog/app/modules/home/controllers/post_controller.dart';
 import 'package:myblog/app/modules/home/models/post.dart';
 import '../../profile/model/liked_posts.dart';
@@ -28,8 +27,10 @@ class HomeView extends GetView<HomeController> {
 
 class PostCard extends StatelessWidget {
   final Post post;
+  final storage = GetStorage();
+  
 
-  const PostCard({super.key, required this.post});
+   PostCard({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +73,7 @@ class PostCard extends StatelessWidget {
                       ],
                     ),
                   ),
+                  storage.read('user_id') !=post.user.id ?
                   ElevatedButton(
                     onPressed: () {
                       controller.isUserFollowed(post.user.id)
@@ -81,7 +83,8 @@ class PostCard extends StatelessWidget {
                     child: Text(controller.isUserFollowed(post.user.id)
                         ? 'Unfollow'
                         : 'Follow'),
-                  ),
+                  ):Container(),
+
                 ],
               ),
               const SizedBox(height: 10.0),
